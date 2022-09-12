@@ -34,7 +34,7 @@
             <div class="separator"></div>
             <div class="font-big">Hotel in Milano</div>
 
-            <div class="horiz-grid separator" *ngFor="let hotel of hotels">
+            <div class="horiz-grid separator" *ngFor="let hotel of hotels" (click)="setActive(hotel)" [ngClass]="{'active' : hotel.id === active?.id}">
                 <div>{{hotel.name}}</div>
                 <div>da {{hotel.rooms[0].price}}</div>
             </div>
@@ -44,6 +44,7 @@
             <div class="horiz-grid">
                 <div></div>
                 <em>{{hotels?.length}} results</em>
+                <!-- <pre>{{active | json}}</pre> -->
             </div>
 
         </div>
@@ -55,8 +56,8 @@
             <img src="https://www.mapquestapi.com/staticmap/v5/map?key=Go3ZWai1i4nd2o7kBuAUs4y7pnpjXdZn¢er=Milano&size=700,300&zoom=13"
                 width="100%" height="200">
             <div class="address">
-                <div class="font-big">Hotel Rockstar</div>
-                <div class="font-small">Milano, Via Marconi 123</div>
+                <div class="font-big">{{active?.name}}</div>
+                <div class="font-small">{{active?.location?.address}}</div>
             </div>
         </div>
     </div>
@@ -109,14 +110,9 @@
     </div>
     <!--IMAGE GALLERY-->
     <div class="card gallery scrollable">
-        <img src="https://picsum.photos/400/200/?image=13" width="100%" height="150">
-        <div class="nested">
-            <div><img src="https://picsum.photos/300/200/?image=22" width="100%"></div>
-            <div><img src="https://picsum.photos/300/200/?image=23" width="100%"></div>
-            <div><img src="https://picsum.photos/300/200/?image=24" width="100%"></div>
-            <div><img src="https://picsum.photos/300/200/?image=25" width="100%"></div>
-            <div><img src="https://picsum.photos/300/200/?image=26" width="100%"></div>
-            <div><img src="https://picsum.photos/300/200/?image=27" width="100%"></div>
+        <img [src]="activeImage" width="100%" height="150">
+        <div class="nested" *ngFor="let img of active?.images"(click)="activeImage = img ">
+            <div><img [src]="img" width="100%"></div>
         </div>
     </div>
 
