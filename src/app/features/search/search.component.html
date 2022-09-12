@@ -119,20 +119,8 @@
     <!--SERVICES-->
     <div class="card services scrollable">
         <div class="title">Services</div>
-        <div class="nested">
-            <div><i class="icon ion-ios-airplane" title="airplane"></i></div>
-            <div><i class="icon ion-ios-alarm" title="alarm"></i></div>
-            <div><i class="icon ion-ios-beer" title="beer"></i></div>
-            <div><i class="icon ion-ios-car" title="car"></i></div>
-            <div><i class="icon ion-ios-heart-empty" title="heart"></i></div>
-            <div><i class="icon ion-ios-train" title="train"></i></div>
-            <div><i class="icon ion-ios-restaurant" title="restaurant"></i></div>
-            <div><i class="icon ion-ios-paw" title="paw"></i></div>
-            <div><i class="icon ion-ios-easel" title="easel"></i></div>
-            <div><i class="icon ion-ios-cafe" title="cafe"></i></div>
-            <div><i class="icon ion-ios-briefcase" title="briefcase"></i></div>
-            <div><i class="icon ion-ios-bed" title="bed"></i></div>
-            <div><i class="icon ion-ios-bycycle" title="bycycle"></i></div>
+        <div *ngFor="let icon of active?.services" class="nested">
+            <div><i [ngClass]="'icon ion-ios-' + icon" [title]="icon"></i></div>
         </div>
     </div>
 
