@@ -1,0 +1,42 @@
+<!--navigation bar-->
+<div>
+    <div class="navigation">
+        <div class="horiz-grid">
+            <div class="logo">BOOKING</div>
+            <div class="horiz-grid">
+                <span class="btn">HOME</span>
+                <span class="btn" routerLink="/search" routerLinkActive="active">SEARCH</span>
+                <span class="btn" routerLink="/cart" routerLinkActive="active">
+                    CART (1)
+                </span>
+                <span class="btn" routerLink="/login" routerLinkActive="active">LOGOUT</span>
+            </div>
+            <em>Fabio Biondi</em>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>
+
+<div class="wrapper">
+    <div class="card">
+        <div class="title">Cart (1)</div>
+        <div class="content">
+
+            <div class="horiz-grid separator">
+                <div class="font-medium">Hotel XYZ</div>
+                <div>Single</div>
+                <div>€ 89</div>
+                <div><i class="icon ion-ios-trash"></i></div>
+            </div>
+
+
+            <br>
+            <br>
+            <div class="horiz-grid">
+                <div></div>
+                <em>1 item</em>
+            </div>
+
+        </div>
+    </div>
