@@ -1,3 +1,5 @@
+
+
 <!--navigation bar-->
 <div>
     <div class="navigation">
@@ -17,43 +19,31 @@
     <router-outlet></router-outlet>
 </div>
 
+<!--SIDEBAR-->
 <div class="wrapper three-cols">
-    <!--SIDEBAR-->
     <div class="card side-bar scrollable">
         <div class="title">Search</div>
         <div class="content">
-            <form>
-                <input type="text" placeholder="City (Rome or Milan)">
+            <form #f="ngForm" (submit)="searchHotels(f.value.text)">
+                <input type="text" placeholder="City (Rome or Milan)" [ngModel]="text" name="text">
                 <button type="submit">SEARCH</button>
             </form>
+
+            <!-- <pre>{{hotels | json}}</pre> -->
 
             <div class="separator"></div>
             <div class="font-big">Hotel in Milano</div>
 
-            <div class="horiz-grid separator">
-                <div>Hotel XYZ</div>
-                <div>da € 89</div>
+            <div class="horiz-grid separator" *ngFor="let hotel of hotels">
+                <div>{{hotel.name}}</div>
+                <div>da {{hotel.rooms[0].price}}</div>
             </div>
 
-            <div class="horiz-grid separator">
-                <div>Hotel ABC</div>
-                <div>da € 189</div>
-            </div>
-
-            <div class="horiz-grid separator active">
-                <div>Hotel RockStar</div>
-                <div>da € 189</div>
-            </div>
-
-            <div class="horiz-grid separator">
-                <div>Hotel ABC</div>
-                <div>da € 189</div>
-            </div>
 
             <div class="separator"></div>
             <div class="horiz-grid">
                 <div></div>
-                <em>4 results</em>
+                <em>{{hotels?.length}} results</em>
             </div>
 
         </div>

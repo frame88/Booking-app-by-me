@@ -1,15 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Hotel } from '../model/hotel';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
+  text = 'Rome';
+  hotels: Hotel[] | undefined;
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+    this.searchHotels(this.text);
+  }
+  //questa abbinata a text="Rome" mi permette di andare direttamente sugli hotel di Roma una volta refreshata la pagina
 
-  ngOnInit(): void {
+
+  searchHotels(text: string) {
+    this.text = text;
+    this.http.get<Hotel[]>('http://localhost:3000/hotels?q=' + text)
+      .subscribe(result => {
+        this.hotels = result;
+      });
   }
 
 }
