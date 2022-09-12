@@ -34,4 +34,12 @@ export class SearchComponent {
     this.active = hotel;
     this.activeImage = hotel.images[0];
   }
+
+  sendEmail({ email, msg }: { email: string, msg: string }) {
+    window.alert(`sent:
+    ${email}
+    ${msg}
+    ${this.active!.email}
+    `);
+  }
 }

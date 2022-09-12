@@ -62,65 +62,49 @@
         </div>
     </div>
 
-    <!--INFO BOX-->
+<!--INFO BOX-->
     <div class="card">
         <div class="content center">
             <!--<img src="https://picsum.photos/400/200/?image=12" width="100%" height="200">-->
 
             <div class="separator"></div>
             <div class="font-superbig">
-                4.5
+                {{active?.rate}}
                 <i class="ion-ios-person"></i>
             </div>
-            <div>
-                <i class="icon ion-ios-star"></i>
-                <i class="icon ion-ios-star"></i>
-                <i class="icon ion-ios-star"></i>
-                <i class="icon ion-ios-star"></i>
-                <i class="icon ion-ios-star-outline"></i>
+            <div *ngIf="active">
+                <i *ngFor="let star of 5 | intToArray; let i = index" class="icon" [ngClass]="{
+                'ion-ios-star': i < active.stars,
+                'ion-ios-star-outline': i >= active.stars
+            }"></i>
             </div>
 
             <br>
 
-            <div class="horiz-grid separator">
-                <div>Single</div>
+            <div class="horiz-grid separator" *ngFor="let room of active?.rooms">
+                <div>{{room.label}}</div>
                 <div>
-                    € 89
-                    <i class="ion-ios-cart"></i>
-                </div>
-            </div>
-
-            <div class="horiz-grid separator">
-                <div>Double</div>
-                <div>
-                    € 99
-                    <i class="ion-ios-cart"></i>
-                </div>
-            </div>
-
-            <div class="horiz-grid separator">
-                <div>Triple</div>
-                <div>
-                    € 115
+                    {{room.price}}
                     <i class="ion-ios-cart"></i>
                 </div>
             </div>
         </div>
 
     </div>
-    <!--IMAGE GALLERY-->
+
+<!--IMAGE GALLERY-->
     <div class="card gallery scrollable">
         <img [src]="activeImage" width="100%" height="150">
-        <div class="nested" *ngFor="let img of active?.images"(click)="activeImage = img ">
-            <div><img [src]="img" width="100%"></div>
+        <div class="nested" >
+            <div *ngFor="let img of active?.images"(click)="activeImage = img "><img [src]="img" width="100%"></div>
         </div>
     </div>
 
     <!--SERVICES-->
     <div class="card services scrollable">
         <div class="title">Services</div>
-        <div *ngFor="let icon of active?.services" class="nested">
-            <div><i [ngClass]="'icon ion-ios-' + icon" [title]="icon"></i></div>
+        <div class="nested">
+            <div *ngFor="let icon of active?.services" ><i [ngClass]="'icon ion-ios-' + icon" [title]="icon"></i></div>
         </div>
     </div>
 
@@ -128,10 +112,10 @@
     <div class="card contact">
         <div class="title">Contacts</div>
         <div class="content">
-            <form>
-                <input type="text" placeholder="Your email*" required>
-                <textarea cols="20" rows="6" placeholder="Your message*" required></textarea>
-                <button type="submit">SEND</button>
+            <form #contactForm ="ngForm" (submit)="sendEmail(contactForm.value)">
+                <input type="text" placeholder="Your email*" required [ngModel] name="email">
+                <textarea cols="20" rows="6" placeholder="Your message*" required ngModel name="msg"></textarea>
+                <button type="submit" [disabled]="contactForm.invalid">SEND</button>
             </form>
         </div>
     </div>
